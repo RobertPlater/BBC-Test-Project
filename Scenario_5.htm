@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+
+    <script>
+        /*Scenario 5:
+          1. Make a GET request to https://testapi.io/api/RMSTest/ibltest
+          2. Verify that the “transmission_start” date value is before the “transmission_end” date
+        */
+
+        (function () {
+            let fetchIt = fetch("https://testapi.io/api/RMSTest/ibltest");
+
+            fetchIt
+                .then(response => response.json())
+                .then(d => {
+                    let dateStart = Date.parse(d.schedule.elements[0].transmission_start)
+                    let dateEnd = Date.parse(d.schedule.elements[0].transmission_end)
+
+                    console.log('Transmission Start Date: ' + d.schedule.elements[0].transmission_start )
+                    console.log('('+dateStart + ' - milliseconds since 01/01/1970 00:00)')
+                    console.log('Transmission End Date: ' + d.schedule.elements[0].transmission_end )
+                    console.log('(' + dateEnd + ' - milliseconds since 01/01/1970 00:00)')
+                    console.log('--------------------------')
+                    if(dateEnd > dateStart){
+                        console.log('--- PASS --- transmission_start IS before transmission_end')
+                    } else if(dateEnd <= dateStart){
+                        console.log('*** FAIL *** transmission_start IS equal or after transmission_end')
+                    }
+                    console.log('--------------------------')
+                    console.log(d)
+                })
+                .catch(err => 
+                        console.log('There has been an error '))
+        })()
+
+    </script>
+</body>
+
+</html>

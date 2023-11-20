@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style> </style>
+</head>
+
+<body>
+
+    <script>
+        /*Scenario 4:
+          1. Make a GET request to https://testapi.io/api/RMSTest/ibltest
+          2. Verify that only one episode in the list has “live” field in “episode” as true
+        */
+        (function () {
+
+            let fetchIt = fetch("https://testapi.io/api/RMSTest/ibltest")
+
+            fetchIt
+                .then(response => response.json())
+                .then(d => {    
+                    let count=0
+                    for (let index = 0; index < d.schedule.elements.length; ++index) {
+                        if (d.schedule.elements[index].episode.live) {
+                            console.log('Episode ' + index + ' - ' + d.schedule.elements[index].episode.title + ' IS live: '+d.schedule.elements[index].episode.live)
+                            count++
+                        }
+                    }
+                    console.log('----------------------')
+                    if(count===1){
+                        console.log('--- PASS --- Live count IS: ' + count)
+                    } else {
+                        console.log('*** FAIL *** Live count IS: ' + count)
+                    }
+                    console.log('----------------------')   
+                    console.log(d)
+                })
+                .catch(err => 
+                        console.log('There has been an error '))
+        })()
+
+    </script>
+</body>
+
+</html>

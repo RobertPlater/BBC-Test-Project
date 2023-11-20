@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style> </style>
+</head>
+
+<body>
+
+    <script>
+        /*Scenario 1:
+          1. Make a GET request to https://testapi.io/api/RMSTest/ibltest
+          2. Verify that the HTTP status code of the response is 200
+          3. Verify that the response time of the request is below 1000 milliseconds
+        */
+        (function () {
+
+            console.time("ConsoleTimer");
+            const start = Date.now();
+
+            setTimeout(myTimeout1, 980) //Delay request / response time
+
+            function myTimeout1() {
+
+                fetch('https://testapi.io/api/RMSTest/ibltest')
+                    .then((response) => {
+                        if (response.status === 200) {
+                            console.log('Response OK: ' + response.ok)
+                            console.log('Response Status: ' + response.status)
+                        }
+                        return response.json()
+                    })
+                    .then((data) => {
+                        //console.timeEnd("Timer1")
+                        const secSpent = (Date.now() - start);
+                        console.log('Timer (Date.now) ' + secSpent)
+                        console.log('------------------------------------')
+                        if (secSpent > 1000) {
+                            console.log('*** Failure *** Response Time > 1000msec (' + secSpent + 'msec)')
+                        } else {
+                            console.log('*** Success *** Response Time <= 1000msec (' + secSpent + 'msec)')
+                        }
+                        console.log('------------------------------------')
+                        console.timeEnd("ConsoleTimer")
+                        console.log(data)
+                    })
+                    
+                    .catch(err => 
+                        console.log('There has been an error '))
+            }
+        })()
+    </script>
+</body>
+
+</html>

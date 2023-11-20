@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style> </style>
+</head>
+
+<body>
+
+	<script>
+		/*Scenario 7:
+		1. Make a GET request to https://testapi.io/api/RMSTest/ibltest/2023-09-11
+		2. Verify that the HTTP status code of the response is 404
+		3. Verify the error object had the properties ‘details’ and ‘http_response_code’
+		*/
+		(function () {
+
+			const start = Date.now();
+			fetch('https://testapi.io/api/RMSTest/ibltest/2023-09-11')
+				.then((response) => {
+					if (response.status === 404) {
+						console.log('Response Status Returned: ' + response.status)
+					} else  {
+						console.log('Response Status Returned (NOT 404): ' + response.status)
+					}
+					//console.log('Response'+response)
+					return response.json()
+				})
+				.then((data) => {
+					if (data.error) {
+						console.log('------------------')
+						console.log('The property \'details\' exists: ' + data.error.hasOwnProperty('details'))
+						console.log('Details: ' + data.error.details)
+						console.log('------------------')
+						console.log('The property \'http_response_code\' exists: ' + data.error.hasOwnProperty('http_response_code'))
+						console.log('Http_Response Code: ' + data.error.http_response_code)
+						console.log('------------------')
+					}
+					console.log(data)
+				})
+				.catch((err) => {
+					console.log('There has been an error ')
+				})
+		})()
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+
+    <script>
+        /*Scenario 2:
+          1. Make a GET request to https://testapi.io/api/RMSTest/ibltest
+          2. Verify if the “id” field is never null or empty(“”) for all 4 items present in the data array
+          3. Verify that the “type” in “episode” for every item is always “episode”
+        */
+        (function () {
+            let fetchIt = fetch("https://testapi.io/api/RMSTest/ibltest");
+
+            fetchIt
+                .then(response => response.json())
+                .then(d => {
+                    for (let index = 0; index < d.schedule.elements.length; ++index) {
+                        let element = d.schedule.elements[index].id;
+                        if (element === '' || element === null || element === undefined) {
+                            console.log('*** FAIL ***  id ' + index + ' IS (null, empty, undefined): ' + element)
+                        }
+                        else {
+                            console.log('--- PASS ---  id ' + index + ' IS ' + element)
+                        }
+                    }
+                    console.log('-----------------------------')
+                    for (let index = 0; index < d.schedule.elements.length; ++index) {
+                        var element = d.schedule.elements[index].episode.type;
+                        if (element !== 'episode' || element === null || element === undefined) {
+                            console.log('*** FAIL ***   Episode type ' + index + ' NOT episode: ' + element)
+                        }
+                        else {
+                            console.log('--- PASS ---  Episode type ' + index + ' IS (episode): ' + element)
+                        }
+                    }
+                    console.log('-----------------------------')
+                    console.log(d)
+                })
+                .catch(err => 
+                        console.log('There has been an error '))
+        })()
+    </script>
+</body>
+
+</html>
