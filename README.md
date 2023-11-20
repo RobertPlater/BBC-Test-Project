@@ -2,11 +2,11 @@
 Title - BBC Software Engineer in Test Take Home Test Team – IBL (iPlayer Business Layer)
 
 Scenario URLs - Please note: run in browser and view the console for test output
-[Right click over browser window > Select Inspect > Select console]
+[Right click over browser window > Select Inspect > Select console] <br />
 
-https://htmlpreview.github.io/?https://github.com/RobertPlater/BBC-Test-Project/blob/main/README.md
+https://htmlpreview.github.io/?https://github.com/RobertPlater/BBC-Test-Project/blob/main/README.md <br />
 
-https://htmlpreview.github.io/?https://github.com/RobertPlater/BBC-Test-Project/blob/main/Scenario_1.htm
+https://htmlpreview.github.io/?https://github.com/RobertPlater/BBC-Test-Project/blob/main/Scenario_1.htm <br />
 
 https://htmlpreview.github.io/?https://github.com/RobertPlater/BBC-Test-Project/blob/main/Scenario_2.htm
 
